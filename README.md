@@ -10,6 +10,7 @@ Your task is to develop a **Users overview** application. The application should
 
 This assignment will give us insights in how well you can create a Front-End application for a Back-End. There are several important points where we will rate your code on:
 
+* UX
 * Using best practices
 * Code structure
 * Code readability
