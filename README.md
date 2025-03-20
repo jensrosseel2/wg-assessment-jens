@@ -53,14 +53,9 @@ The mock API is available at `http://localhost:3001/` and includes the following
    npm run server
    ```
 
-## Final Result
-
-To complete your assignment, you need to deploy your application to Vercel. This will allow us to review your working solution online.
-
-### Submission Requirements
+### I'm finished, what now?
 Please provide the following:
 
 * A link to your public GitHub repository containing the complete project code
-* A link to your live Vercel deployment
 
 That's all!
