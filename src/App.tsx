@@ -1,11 +1,14 @@
 import "./App.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import UserOverview from "./pages/UserOverview";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <div>
-      <h1 className="text-3xl">Overview</h1>
-      <p>Here you can find user details.</p>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <UserOverview />
+    </QueryClientProvider>
   );
 };
 
