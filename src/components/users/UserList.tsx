@@ -1,3 +1,4 @@
+import InfoAlert from "../common/InfoAlert";
 import User from "./User";
 import { UserProps } from "./User";
 
@@ -7,7 +8,7 @@ interface UserListProps {
 
 export default function UserList({ users }: UserListProps) {
   if (users.length === 0) {
-    return <div>No users found.</div>;
+    return <InfoAlert message={"No users found."} />;
   }
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
