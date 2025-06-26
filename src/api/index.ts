@@ -12,8 +12,6 @@ interface UserListProps {
 }
 
 export async function getUsers(): Promise<UserListProps> {
-  console.log(`${baseUrl}/users`);
-
   const response = await fetch(`${baseUrl}/users`);
   const users = await response.json();
 
