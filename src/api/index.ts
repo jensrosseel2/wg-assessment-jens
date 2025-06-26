@@ -1,14 +1,9 @@
+import { UserProps } from "../components/users/User";
+
 const baseUrl = import.meta.env.VITE_API_URL;
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-}
-
 interface UserListProps {
-  users: User[];
+  users: UserProps[];
 }
 
 export async function getUsers(): Promise<UserListProps> {

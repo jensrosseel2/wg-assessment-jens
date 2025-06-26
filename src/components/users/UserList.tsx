@@ -1,14 +1,8 @@
 import User from "./User";
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-}
+import { UserProps } from "./User";
 
 interface UserListProps {
-  users: User[];
+  users: UserProps[];
 }
 
 export default function UserList({ users }: UserListProps) {
