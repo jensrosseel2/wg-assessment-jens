@@ -2,6 +2,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { saveUser } from "../../api/index";
+import LoadingIndicator from "../common/LoadingIndicator";
 
 interface FormProps {
   firstname: string;
@@ -106,7 +107,7 @@ export default function UserForm() {
             </label>
             <input
               {...register("lastname", validationRules.lastname)}
-              className="w-full text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none bg-white focus:border-gray-500"
+              className="w-full text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none bg-white focus:border-gray-500"
               id="grid-last-name"
               type="text"
               disabled={isSubmitting}
@@ -160,7 +161,7 @@ export default function UserForm() {
         </div>
         <div className="flex items-center justify-between">
           <button type="submit" className="default-btn">
-            Save
+            {isSubmitting ? <LoadingIndicator /> : "Save"}
           </button>
           <button
             type="reset"

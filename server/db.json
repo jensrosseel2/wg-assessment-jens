@@ -11,12 +11,6 @@
       "name": "Jane Smith",
       "email": "jane@example.com",
       "role": "User"
-    },
-    {
-      "name": "Jens Rosseel",
-      "email": "jensrosseel04@gmail.com",
-      "role": "Admin",
-      "id": 3
     }
   ]
 }
