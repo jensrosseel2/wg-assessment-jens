@@ -17,7 +17,7 @@ export default function UserOverview() {
   if (error) return <ErrorAlert message={error.message} />;
   return (
     <>
-      <span className="relative inline-block mb-5">
+      <span className="relative inline-block mb-6">
         <span className="font-bold text-3xl">Users overview</span>
         <svg
           className="absolute -bottom-1 left-0 w-full h-2 pointer-events-none"
@@ -33,7 +33,7 @@ export default function UserOverview() {
         </svg>
       </span>
       <Link to={"/users/add"}>
-        <button className="float-right">Add user</button>
+        <button className="float-right default-btn">Add user</button>
       </Link>
 
       <UserList users={data.users} />

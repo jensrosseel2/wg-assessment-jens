@@ -26,7 +26,7 @@ a:hover {
   text-decoration: underline;
 }
 
-button {
+button.default-btn {
   background-color: #ff8000;
   color: #fff;
   border: none;
@@ -35,7 +35,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button.default-btn:hover {
   background-color: #f49536;
 }
 
