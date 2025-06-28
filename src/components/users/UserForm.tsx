@@ -5,6 +5,7 @@ import { saveUser } from "../../api/index";
 import LoadingIndicator from "../common/LoadingIndicator";
 import LabelInput from "../common/LabelInput";
 import { UserProps } from "./User";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface FormProps {
   id?: number;
@@ -16,6 +17,7 @@ interface FormProps {
 
 export default function UserForm({ user }: { user?: UserProps }) {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const methods = useForm<FormProps>();
   const {
@@ -47,6 +49,10 @@ export default function UserForm({ user }: { user?: UserProps }) {
           role: role,
         });
 
+        await queryClient.invalidateQueries({
+          queryKey: ["users"],
+        });
+
         reset();
         navigate({
           pathname: "/users",
@@ -55,7 +61,7 @@ export default function UserForm({ user }: { user?: UserProps }) {
         console.error("Error saving user:", error);
       }
     },
-    [reset, navigate, user?.id]
+    [reset, navigate, user?.id, queryClient]
   );
 
   useEffect(() => {
