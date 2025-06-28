@@ -11,6 +11,7 @@ export default function AddOrEditUser() {
     queryKey: ["user", id],
     queryFn: () => getUser(Number(id)),
     enabled: !!id,
+    staleTime: 2 * 60 * 1000,
   });
 
   return (
@@ -32,9 +33,13 @@ export default function AddOrEditUser() {
           />
         </svg>
       </span>
-      <AsyncData isPending={isPending} error={error}>
-        <UserForm user={data} />
-      </AsyncData>
+      {id ? (
+        <AsyncData isPending={isPending} error={error}>
+          <UserForm user={data} />
+        </AsyncData>
+      ) : (
+        <UserForm user={undefined} />
+      )}
     </div>
   );
 }

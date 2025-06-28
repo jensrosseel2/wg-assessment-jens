@@ -34,7 +34,11 @@ const router = createBrowserRouter([
           },
           {
             path: "add",
-            element: <AddOrEditUser />,
+            element: (
+              <QueryClientProvider client={queryClient}>
+                <AddOrEditUser />
+              </QueryClientProvider>
+            ),
           },
           {
             path: "edit/:id",
