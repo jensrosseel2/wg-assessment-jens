@@ -1,6 +1,5 @@
 import { createRoot } from "react-dom/client";
 import "./App.css";
-import App from "./App.tsx";
 import {
   Navigate,
   createBrowserRouter,
@@ -9,6 +8,10 @@ import {
 import Layout from "./layout/Layout.tsx";
 import AddOrEditUser from "./pages/AddOrEditUser.tsx";
 import { StrictMode } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import UserOverview from "./pages/UserOverview.tsx";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -23,11 +26,23 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <App />,
+            element: (
+              <QueryClientProvider client={queryClient}>
+                <UserOverview />
+              </QueryClientProvider>
+            ),
           },
           {
             path: "add",
             element: <AddOrEditUser />,
+          },
+          {
+            path: "edit/:id",
+            element: (
+              <QueryClientProvider client={queryClient}>
+                <AddOrEditUser />
+              </QueryClientProvider>
+            ),
           },
         ],
       },

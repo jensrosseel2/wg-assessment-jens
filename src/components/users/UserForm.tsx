@@ -1,18 +1,20 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { saveUser } from "../../api/index";
 import LoadingIndicator from "../common/LoadingIndicator";
 import LabelInput from "../common/LabelInput";
+import { UserProps } from "./User";
 
 interface FormProps {
+  id?: number;
   firstname: string;
   lastname: string;
   email: string;
   role: string;
 }
 
-export default function UserForm() {
+export default function UserForm({ user }: { user?: UserProps }) {
   const navigate = useNavigate();
 
   const methods = useForm<FormProps>();
@@ -21,6 +23,7 @@ export default function UserForm() {
     register,
     reset,
     formState: { errors, isSubmitting },
+    setValue,
   } = methods;
 
   const handleCancel = useCallback(() => {
@@ -38,6 +41,7 @@ export default function UserForm() {
 
       try {
         await saveUser({
+          id: user?.id,
           name: fullname,
           email: email,
           role: role,
@@ -51,8 +55,22 @@ export default function UserForm() {
         console.error("Error saving user:", error);
       }
     },
-    [reset, navigate]
+    [reset, navigate, user?.id]
   );
+
+  useEffect(() => {
+    if (user) {
+      const firstname = user.name.split(" ")[0] || "";
+      const lastname = user.name.split(" ").slice(1).join(" ") || "";
+
+      setValue("firstname", firstname);
+      setValue("lastname", lastname);
+      setValue("email", user.email);
+      setValue("role", user.role);
+    } else {
+      reset();
+    }
+  }, [user, reset, setValue]);
 
   const validationRules = useMemo(
     () => ({

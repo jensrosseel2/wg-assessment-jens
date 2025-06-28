@@ -18,6 +18,11 @@ export async function getUsers(): Promise<UserListProps> {
   return { users };
 }
 
+export async function getUser(id: number): Promise<UserProps> {
+  const response = await axios.get<UserProps>(`/users/${id}`);
+  return response.data;
+}
+
 export const saveUser = async (body: UserProps) => {
   const { id, ...values } = body;
 

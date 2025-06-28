@@ -5,6 +5,7 @@ interface LabelInputProps {
   name: string;
   type: string;
   validationRules: object;
+  defaultValue?: string;
 }
 
 export default function LabelInput({
@@ -32,6 +33,7 @@ export default function LabelInput({
         type={type}
         disabled={isSubmitting}
         className="w-full text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none bg-white focus:border-gray-500"
+        defaultValue={rest.defaultValue || ""}
         {...rest}
       />
       {hasError && typeof errors[name]?.message === "string" ? (
