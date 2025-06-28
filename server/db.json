@@ -11,6 +11,42 @@
       "name": "Jane Smith",
       "email": "jane@example.com",
       "role": "User"
+    },
+    {
+      "name": "Jens Rosseel",
+      "email": "jensrosseel04@gmail.com",
+      "role": "Admin",
+      "id": 3
+    },
+    {
+      "name": "Mattjana Karnas",
+      "email": "jensrosseel04@gmail.com",
+      "role": "User",
+      "id": 4
+    },
+    {
+      "name": "Test Loading indicator",
+      "email": "LoadingIndicator@gmail.com",
+      "role": "user",
+      "id": 5
+    },
+    {
+      "name": "User Test",
+      "email": "usertest@outlook.com",
+      "role": "poweruser",
+      "id": 6
+    },
+    {
+      "name": "User Test",
+      "email": "usertest@outlook.com",
+      "role": "Admin",
+      "id": 7
+    },
+    {
+      "name": "test user",
+      "email": "testuser@gmail.com",
+      "role": "Power User",
+      "id": 8
     }
   ]
 }

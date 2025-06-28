@@ -3,6 +3,7 @@ import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { saveUser } from "../../api/index";
 import LoadingIndicator from "../common/LoadingIndicator";
+import LabelInput from "../common/LabelInput";
 
 interface FormProps {
   firstname: string;
@@ -62,16 +63,21 @@ export default function UserForm() {
         required: "Last name is required",
       },
       email: {
-        required: "Email name is required",
+        required: "Email is required",
         pattern: {
           value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
           message: "Invalid email address",
         },
       },
       role: {
-        required: "Role name is required",
+        required: "Role is required",
       },
     }),
+    []
+  );
+
+  const userRoleOptions = useMemo(
+    () => [{ value: "Admin" }, { value: "Power User" }, { value: "User" }],
     []
   );
 
@@ -80,82 +86,55 @@ export default function UserForm() {
       <form onSubmit={handleSubmit(handleSaveUser)}>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              className="block tracking-wide text-gray-700 mb-2 font-bold"
-              htmlFor="grid-first-name"
-            >
-              First Name
-            </label>
-            <input
-              {...register("firstname", validationRules.firstname)}
-              className="w-full text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none bg-white focus:border-gray-500"
-              id="grid-first-name"
+            <LabelInput
+              label="First Name"
+              name="firstname"
               type="text"
-              disabled={isSubmitting}
+              validationRules={validationRules.firstname}
             />
-            {typeof errors.firstname?.message === "string" && (
-              <p className="text-red-500 text-xs">{errors.firstname.message}</p>
-            )}
           </div>
 
           <div className="w-full md:w-1/2 px-3">
-            <label
-              className="block tracking-wide text-gray-700 font-bold mb-2"
-              htmlFor="grid-last-name"
-            >
-              Last Name
-            </label>
-            <input
-              {...register("lastname", validationRules.lastname)}
-              className="w-full text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none bg-white focus:border-gray-500"
-              id="grid-last-name"
+            <LabelInput
+              label="Last Name"
+              name="lastname"
               type="text"
-              disabled={isSubmitting}
+              validationRules={validationRules.lastname}
             />
-            {typeof errors.lastname?.message === "string" && (
-              <p className="text-red-500 text-xs">{errors.lastname.message}</p>
-            )}
           </div>
         </div>
 
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              {...register("email", validationRules.email)}
-              className="w-full text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none bg-white focus:border-gray-500"
-              id="email"
+            <LabelInput
+              label="Email"
+              name="email"
               type="email"
-              disabled={isSubmitting}
+              validationRules={validationRules.email}
             />
-            {typeof errors.email?.message === "string" && (
-              <p className="text-red-500 text-xs">{errors.email.message}</p>
-            )}
           </div>
         </div>
 
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
             <label
-              className="block text-gray-700 font-bold mb-2"
               htmlFor="role"
+              className="block text-gray-700 mb-2 font-bold"
             >
               Role
             </label>
-            <input
+            <select
               {...register("role", validationRules.role)}
               className="w-full text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none bg-white focus:border-gray-500"
-              id="role"
-              type="text"
-              disabled={isSubmitting}
-            />
-            {typeof errors.role?.message === "string" && (
-              <p className="text-red-500 text-xs">{errors.role.message}</p>
+            >
+              {userRoleOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.value}
+                </option>
+              ))}
+            </select>
+            {errors.role && (
+              <div className="text-red-500 text-xs">{errors.role.message}</div>
             )}
           </div>
         </div>
@@ -165,7 +144,7 @@ export default function UserForm() {
           </button>
           <button
             type="reset"
-            className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:cursor-pointer"
             onClick={handleCancel}
           >
             Cancel
