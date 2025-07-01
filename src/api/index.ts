@@ -11,8 +11,17 @@ interface UserListProps {
   users: UserProps[];
 }
 
-export async function getUsers(): Promise<UserListProps> {
-  const response = await axios.get<UserProps[]>("/users");
+export async function getUsers(
+  sortBy?: string,
+  order: "asc" | "desc" = "asc"
+): Promise<UserListProps> {
+  const params = new URLSearchParams();
+  if (sortBy) {
+    params.append("_sort", sortBy);
+    params.append("_order", order);
+  }
+
+  const response = await axios.get<UserProps[]>(`/users?${params.toString()}`);
   const users = response.data;
 
   return { users };
