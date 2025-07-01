@@ -13,22 +13,10 @@
       "role": "User"
     },
     {
-      "name": "Jons Rosseel",
+      "name": "Joren Rosseel",
       "email": "jensrosseel04@gmail.com",
       "role": "Power User",
       "id": 3
-    },
-    {
-      "name": "Mattjana Karnas",
-      "email": "mattjanakarnas@email.com",
-      "role": "Admin",
-      "id": 4
-    },
-    {
-      "name": "User Test",
-      "email": "usertest@outlook.com",
-      "role": "User",
-      "id": 6
     }
   ]
 }

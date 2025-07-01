@@ -46,6 +46,11 @@ export default function UserForm({ user }: { user?: UserProps }) {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
+
+      if (user?.id) {
+        queryClient.invalidateQueries({ queryKey: ["user", user.id] });
+      }
+
       reset();
       navigate({ pathname: "/users" });
     },
@@ -160,9 +165,13 @@ export default function UserForm({ user }: { user?: UserProps }) {
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <button type="submit" className="default-btn">
-            {saveUserMutation.isPending ? <LoadingIndicator /> : "Save"}
-          </button>
+          {saveUserMutation.isPending ? (
+            <LoadingIndicator />
+          ) : (
+            <button type="submit" className="default-btn">
+              Save
+            </button>
+          )}
           <button
             type="reset"
             className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:cursor-pointer"

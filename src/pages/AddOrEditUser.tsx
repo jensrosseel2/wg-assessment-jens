@@ -13,7 +13,7 @@ export default function AddOrEditUser() {
   const { id } = useParams();
 
   const { isPending, error, data } = useQuery({
-    queryKey: ["user", id],
+    queryKey: ["user", Number(id)],
     queryFn: () => getUser(Number(id)),
     enabled: !!id,
     staleTime: 2 * 60 * 1000,
