@@ -3,8 +3,13 @@ import { useParams } from "react-router-dom";
 import { getUser } from "../api/index.ts";
 import AsyncData from "../components/common/AsyncData.tsx";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import Modal from "../components/common/Modal.tsx";
+import DeleteUserModal from "../components/users/DeleteUserModal.tsx";
 
 export default function AddOrEditUser() {
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
   const { id } = useParams();
 
   const { isPending, error, data } = useQuery({
@@ -15,7 +20,7 @@ export default function AddOrEditUser() {
   });
 
   return (
-    <div className="container">
+    <>
       <span className="relative inline-block mb-6">
         <span className="font-bold text-3xl">
           {id ? "Edit user" : "Add user"}
@@ -34,12 +39,28 @@ export default function AddOrEditUser() {
         </svg>
       </span>
       {id ? (
+        <button
+          onClick={() => setOpenDeleteModal(true)}
+          type="button"
+          className="float-right bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:cursor-pointer"
+        >
+          Delete user
+        </button>
+      ) : null}
+      {id ? (
         <AsyncData isPending={isPending} error={error}>
           <UserForm user={data} />
         </AsyncData>
       ) : (
         <UserForm user={undefined} />
       )}
-    </div>
+
+      <Modal open={openDeleteModal} onClose={() => setOpenDeleteModal(false)}>
+        <DeleteUserModal
+          setOpenDeleteModal={setOpenDeleteModal}
+          id={Number(id)}
+        />
+      </Modal>
+    </>
   );
 }

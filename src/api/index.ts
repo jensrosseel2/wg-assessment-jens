@@ -32,3 +32,7 @@ export const saveUser = async (body: UserProps) => {
     data: values,
   });
 };
+
+export const deleteUser = async (id: number) => {
+  await axios.delete(`/users/${id}`);
+};

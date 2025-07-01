@@ -5,7 +5,7 @@ import { saveUser } from "../../api/index";
 import LoadingIndicator from "../common/LoadingIndicator";
 import LabelInput from "../common/LabelInput";
 import { UserProps } from "./User";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 interface FormProps {
   id?: number;
@@ -24,7 +24,7 @@ export default function UserForm({ user }: { user?: UserProps }) {
     handleSubmit,
     register,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     setValue,
   } = methods;
 
@@ -36,32 +36,29 @@ export default function UserForm({ user }: { user?: UserProps }) {
     reset();
   }, [reset, navigate]);
 
+  const saveUserMutation = useMutation({
+    mutationFn: (data: FormProps) =>
+      saveUser({
+        id: user?.id,
+        name: `${data.firstname} ${data.lastname}`,
+        email: data.email,
+        role: data.role,
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      reset();
+      navigate({ pathname: "/users" });
+    },
+    onError: (error) => {
+      console.error("Error saving user:", error);
+    },
+  });
+
   const handleSaveUser = useCallback(
     async (data: FormProps) => {
-      const { firstname, lastname, email, role } = data;
-      const fullname = firstname + " " + lastname;
-
-      try {
-        await saveUser({
-          id: user?.id,
-          name: fullname,
-          email: email,
-          role: role,
-        });
-
-        await queryClient.invalidateQueries({
-          queryKey: ["users"],
-        });
-
-        reset();
-        navigate({
-          pathname: "/users",
-        });
-      } catch (error) {
-        console.error("Error saving user:", error);
-      }
+      saveUserMutation.mutate(data);
     },
-    [reset, navigate, user?.id, queryClient]
+    [saveUserMutation]
   );
 
   useEffect(() => {
@@ -164,7 +161,7 @@ export default function UserForm({ user }: { user?: UserProps }) {
         </div>
         <div className="flex items-center justify-between">
           <button type="submit" className="default-btn">
-            {isSubmitting ? <LoadingIndicator /> : "Save"}
+            {saveUserMutation.isPending ? <LoadingIndicator /> : "Save"}
           </button>
           <button
             type="reset"
