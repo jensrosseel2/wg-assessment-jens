@@ -16,8 +16,8 @@ export default function User({ id, name, email, role }: UserProps) {
       <td className="px-6 py-4">{email}</td>
       <td className="px-6 py-4">{role}</td>
       <td className="px-6 py-4 text-right">
-        <Link to={`/users/edit/${id}`}>
-          <a className="font-semibold">Edit</a>
+        <Link to={`/users/edit/${id}`} className="font-semibold">
+          Edit
         </Link>
       </td>
     </tr>

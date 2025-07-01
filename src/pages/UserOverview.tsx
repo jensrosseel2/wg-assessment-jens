@@ -4,11 +4,24 @@ import UserList from "../components/users/UserList.tsx";
 import { Link } from "react-router-dom";
 import LoadingIndicator from "../components/common/LoadingIndicator.tsx";
 import ErrorAlert from "../components/common/ErrorAlert.tsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function UserOverview() {
-  const [sortField, setSortField] = useState<string>("name");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortField, setSortField] = useState<string>(() => {
+    return localStorage.getItem("sortField") || "name";
+  });
+
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">(() => {
+    return (localStorage.getItem("sortOrder") as "asc" | "desc") || "asc";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("sortField", sortField);
+  }, [sortField]);
+
+  useEffect(() => {
+    localStorage.setItem("sortOrder", sortOrder);
+  }, [sortOrder]);
 
   const { isPending, error, data } = useQuery({
     queryKey: ["users", sortField, sortOrder],
