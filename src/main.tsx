@@ -10,6 +10,7 @@ import AddOrEditUser from "./pages/AddOrEditUser.tsx";
 import { StrictMode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserOverview from "./pages/UserOverview.tsx";
+import UserDetailsPage from "./pages/UserDetailsPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
             element: (
               <QueryClientProvider client={queryClient}>
                 <AddOrEditUser />
+              </QueryClientProvider>
+            ),
+          },
+          {
+            path: ":id",
+            element: (
+              <QueryClientProvider client={queryClient}>
+                <UserDetailsPage />
               </QueryClientProvider>
             ),
           },

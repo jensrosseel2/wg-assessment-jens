@@ -33,7 +33,7 @@ export default function AddOrEditUser() {
           <path
             d="M0,10 C30,0 70,0 100,10"
             stroke="#ff8000"
-            strokeWidth="3"
+            strokeWidth="4"
             fill="none"
           />
         </svg>
@@ -42,7 +42,7 @@ export default function AddOrEditUser() {
         <button
           onClick={() => setOpenDeleteModal(true)}
           type="button"
-          className="float-right bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:cursor-pointer"
+          className="float-right delete-btn"
         >
           Delete user
         </button>

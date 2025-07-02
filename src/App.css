@@ -39,6 +39,19 @@ button.default-btn:hover {
   background-color: #f49536;
 }
 
+button.delete-btn {
+  background-color: #fb2c36;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.delete-btn:hover {
+  background-color: #e0242b;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;

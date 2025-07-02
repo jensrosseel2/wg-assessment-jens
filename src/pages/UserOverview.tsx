@@ -44,7 +44,7 @@ export default function UserOverview() {
           <path
             d="M0,10 C30,0 70,0 100,10"
             stroke="#ff8000"
-            strokeWidth="3"
+            strokeWidth="4"
             fill="none"
           />
         </svg>
