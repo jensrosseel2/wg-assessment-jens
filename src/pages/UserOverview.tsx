@@ -34,9 +34,11 @@ export default function UserOverview() {
   if (error) return <ErrorAlert message={error.message} />;
   return (
     <>
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <span className="relative inline-block">
-          <span className="font-bold text-3xl">Users overview</span>
+          <span className="font-bold text-3xl leading-tight">
+            Users overview
+          </span>
           <svg
             className="absolute -bottom-1 left-0 w-full h-2 pointer-events-none"
             viewBox="0 0 100 10"

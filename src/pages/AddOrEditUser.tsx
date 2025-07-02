@@ -22,7 +22,7 @@ export default function AddOrEditUser() {
   return (
     <>
       <span className="relative inline-block mb-6">
-        <span className="font-bold text-3xl">
+        <span className="font-bold text-3xl leading-tight">
           {id ? "Edit user" : "Add user"}
         </span>
         <svg

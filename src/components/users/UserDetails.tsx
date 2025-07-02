@@ -37,7 +37,7 @@ export default function UserDetails({ user }: { user?: UserProps }) {
 
           <div className="text-center lg:text-left">
             <span className="relative inline-block mb-4">
-              <span className="font-bold text-3xl sm:text-4xl">
+              <span className="font-bold text-3xl sm:text-4xl leading-tight">
                 {user.name}
               </span>
               <svg
