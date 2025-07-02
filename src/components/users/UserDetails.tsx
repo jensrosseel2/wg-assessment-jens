@@ -27,27 +27,19 @@ export default function UserDetails({ user }: { user?: UserProps }) {
             </button>
           </Link>
         </div>
-        <div className="float-right">
-          <Link to={`/users/edit/${user.id}`}>
-            <button className="default-btn">Edit</button>
-          </Link>
-          <button
-            onClick={() => setOpenDeleteModal(true)}
-            className="delete-btn ml-2"
-          >
-            Delete
-          </button>
-        </div>
-        <div className="flex  space-x-6">
+
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6">
           <img
             src={profileImg}
             alt="Profile"
-            className="w-50 h-50 rounded-2xl  border-2 border-gray-300 shadow-lg"
+            className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 rounded-2xl border-2 border-gray-300 shadow-lg object-cover"
           />
 
-          <div>
-            <span className="relative inline-block mb-6">
-              <span className="font-bold text-4xl">{user.name}</span>
+          <div className="text-center lg:text-left">
+            <span className="relative inline-block mb-4">
+              <span className="font-bold text-3xl sm:text-4xl">
+                {user.name}
+              </span>
               <svg
                 className="absolute -bottom-1 left-0 w-full h-2 pointer-events-none"
                 viewBox="0 0 100 10"
@@ -63,6 +55,17 @@ export default function UserDetails({ user }: { user?: UserProps }) {
             </span>
             <p className="text-lg text-gray-600 py-1">{user.email}</p>
             <p className="text-lg text-gray-500 italic py-1">{user.role}</p>
+          </div>
+          <div className="mb-4 flex flex-col sm:flex-row gap-2 lg:ml-auto">
+            <Link to={`/users/edit/${user.id}`}>
+              <button className="default-btn w-full sm:w-auto">Edit</button>
+            </Link>
+            <button
+              onClick={() => setOpenDeleteModal(true)}
+              className="delete-btn w-full sm:w-auto"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
