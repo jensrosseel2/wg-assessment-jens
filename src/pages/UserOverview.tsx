@@ -34,46 +34,52 @@ export default function UserOverview() {
   if (error) return <ErrorAlert message={error.message} />;
   return (
     <>
-      <span className="relative inline-block mb-6">
-        <span className="font-bold text-3xl">Users overview</span>
-        <svg
-          className="absolute -bottom-1 left-0 w-full h-2 pointer-events-none"
-          viewBox="0 0 100 10"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,10 C30,0 70,0 100,10"
-            stroke="#ff8000"
-            strokeWidth="4"
-            fill="none"
-          />
-        </svg>
-      </span>
-
-      <div className="mb-4 flex items-center float-right gap-4">
-        <div className="flex items-center gap-4">
-          <label className="text-sm font-medium text-gray-700">Sort by:</label>
-          <select
-            className="rounded-xl border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-[#ff8000] text-sm"
-            value={sortField}
-            onChange={(e) => setSortField(e.target.value)}
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <span className="relative inline-block">
+          <span className="font-bold text-3xl">Users overview</span>
+          <svg
+            className="absolute -bottom-1 left-0 w-full h-2 pointer-events-none"
+            viewBox="0 0 100 10"
+            preserveAspectRatio="none"
           >
-            <option value="name">Name</option>
-            <option value="role">Role</option>
-          </select>
+            <path
+              d="M0,10 C30,0 70,0 100,10"
+              stroke="#ff8000"
+              strokeWidth="4"
+              fill="none"
+            />
+          </svg>
+        </span>
 
-          <select
-            className="rounded-xl border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-[#ff8000] text-sm"
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
-          >
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+            <label className="text-sm font-medium text-gray-700">
+              Sort by:
+            </label>
+            <select
+              className="rounded-xl border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-[#ff8000] text-sm"
+              value={sortField}
+              onChange={(e) => setSortField(e.target.value)}
+            >
+              <option value="name">Name</option>
+              <option value="role">Role</option>
+            </select>
+
+            <select
+              className="rounded-xl border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-[#ff8000] text-sm"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
+            >
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+          <Link to={"/users/add"}>
+            <button className="default-btn self-start sm:self-auto">
+              Add user
+            </button>
+          </Link>
         </div>
-        <Link to={"/users/add"}>
-          <button className="default-btn">Add user</button>
-        </Link>
       </div>
 
       <UserList users={data.users} />

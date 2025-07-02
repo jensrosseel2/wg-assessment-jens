@@ -13,7 +13,7 @@ export default function UserList({ users }: UserListProps) {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500">
-        <thead className="text-s text-white uppercase bg-[#ff8000]">
+        <thead className="text-sm text-white uppercase bg-[#ff8000]">
           <tr>
             <th scope="col" className="px-6 py-3">
               Name

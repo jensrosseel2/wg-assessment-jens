@@ -11,6 +11,12 @@
       "email": "jensrosseel04@gmail.com",
       "role": "Power User",
       "id": 3
+    },
+    {
+      "name": "Mattjana Karnas",
+      "email": "mattjanakarnas@email.com",
+      "role": "Admin",
+      "id": 4
     }
   ]
 }
